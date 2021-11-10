@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: #EEEEEE;
+    }
+    p {
+        text-align: center;
+    }
+    li {
+        display: block;
+        text-align: center;
+        margin: auto;
+        list-style: upper-alpha;
+    }
+    .container {
+        /* border: 1px dotted #FF5151; */
+        width: 70%;
+        margin: auto;
+    }
+    .text {
+        font-size: 1.5rem;
+        text-transform: capitalize;
+    }
+    .error {
+        color: #FF5151;
+    }
+    .icon {
+        display: block;
+        text-align: center;
+        margin: 5rem auto;
+    }
+    .success {
+        color: #2FDD92;
+    }
+</style>
+<body>
+    <ul>
+        {% if result.status %}
+            <div class="container">
+                <div class="icon"><i class="far fa-thumbs-up fa-10x" style="color: #2FDD92;"></i></div>
+            </div>
+            <p class="text success">Password reset successfull</p>
+        {% endif %}
+        {% if result.detail %}
+            <div class="container">
+                <div class="icon"><i class="fas fa-exclamation fa-10x" style="color: #FF5151;"></i></div>
+            </div>
+            <p class="text error">- invalid link -</p>
+        {% endif %}
+        {% if result.password %}
+            <div class="container">
+                <div class="icon"><i class="fas fa-exclamation fa-10x" style="color: #FF5151;"></i></div>
+            </div>
+            {% for msg in result.password %}
+                <li class="error">{{msg}}</li>
+            {% endfor %}
+        {% endif %}
+        
+    </ul>
+</body>
+</html>
